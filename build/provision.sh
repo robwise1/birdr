@@ -26,7 +26,7 @@ rm Python-3.7.0 -r
 # install pip packages (for IDE autocompletion - dev_appserver.py will install them too)
 python3 -m pip install -U pip
 python3 -m pip install gunicorn
-python3 -m pip install -r /build/requirements.txt
+python3 -m pip install -r /vagrant/build/requirements.txt
 
 # install curl
 apt-get install -y curl
@@ -69,9 +69,9 @@ service postgresql restart
 # fi
 
 # create database and user
-sudo -u postgres createdb recordlog
-sudo -u postgres psql -c "CREATE ROLE birdr SUPERUSER INHERIT CREATEDB LOGIN PASSWORD 'pass';"
+sudo -u postgres createdb birdr
+sudo -u postgres psql -c "CREATE ROLE birdy SUPERUSER INHERIT CREATEDB LOGIN PASSWORD 'pass';"
 
 # run migrations
-cd /vagrant
-python3 ./manage.py migrate
+cd /vagrant/project/core/
+python3 manage.py migrate
