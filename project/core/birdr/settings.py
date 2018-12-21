@@ -140,7 +140,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/vagrant/static/'
+# Additional locations of static files
+STATICFILES_DIRS = (
+    '/vagrant/static',
+)
 
-
-ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
+REGISTRATION_OPEN = True
+# One-week activation window
+ACCOUNT_ACTIVATION_DAYS = 7 
