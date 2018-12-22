@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django_registration',
 
     'birds',
-    'nets',
     'profiles',
     'stations',
 ]
@@ -137,8 +136,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/vagrant/static/'
 # Additional locations of static files
@@ -151,3 +148,26 @@ LOGIN_REDIRECT_URL = '/'
 REGISTRATION_OPEN = True
 # One-week activation window
 ACCOUNT_ACTIVATION_DAYS = 7 
+
+
+REST_FRAMEWORK = {
+    # Authentication.
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework.authentication.TokenAuthentication',
+    # ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+        # Versioning.
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+    'DEFAULT_VERSION': '1',
+    'ALLOWED_VERSIONS': ['1'],
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer'
+    ),
+    'EXCEPTION_HANDLER': 'tools.api.problem_exception_handler',
+
+    # Pagination.
+    'DEFAULT_PAGINATION_CLASS': 'tools.pagination.LinksPageNumberPagination',
+}

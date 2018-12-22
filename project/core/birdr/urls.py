@@ -6,7 +6,6 @@ from django.contrib import admin
 from django.urls import path
 
 import birds.urls
-import nets.urls
 import profiles.urls
 import stations.urls
 from profiles.views import register
@@ -16,12 +15,8 @@ urlpatterns = [
     url(r'^accounts/register/', register),
     url(r'^accounts/', include('django_registration.backends.one_step.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    # url(r'^register/', register),
-    # url(r'^accounts/', include('django_registration.backends.one_step.urls')),
-    # url(r'^accounts/', include('django.contrib.auth.urls')),
 
     url(r'^', include(('birds.urls', 'birds'), namespace='birds')),
-    url(r'^', include(('nets.urls', 'nets'), namespace='nets')),
     url(r'^', include(('profiles.urls', 'profiles'), namespace='profiles')),
     url(r'^', include(('stations.urls', 'stations'), namespace='stations')),
     url(r'^$', TemplateView.as_view(template_name='home.html')),

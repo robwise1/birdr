@@ -3,8 +3,8 @@ from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator 
 
 from birds.species_list import species_list
-from nets.models import Net
 from profiles.models import User
+from stations.models import Net
 
 SEX_LIST = (
     ('U', 'Unknown'),

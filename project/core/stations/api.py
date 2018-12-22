@@ -1,8 +1,10 @@
 from rest_framework import mixins, viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 
-from stations.models import Station
 from stations import serializers
+from stations.models import Station
+from stations.services import station_service
+
 
 class StationViewSet(viewsets.ModelViewSet):
     """
@@ -12,4 +14,4 @@ class StationViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, )
 
     def get_queryset(self):
-        return Station.objects.all()
+        return station_service.get_user_stations(self.request.user)
