@@ -7,7 +7,7 @@ class Station(models.Model):
     """
     This represents a banding station
     """
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
         # XXX Add Location Field with some widget
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     members = models.ManyToManyField(User, related_name='members')
