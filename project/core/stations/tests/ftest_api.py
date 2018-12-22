@@ -21,7 +21,6 @@ class StationTestCase(FunctionalTestCase, TestCase):
 
         # assert the payload result has three items
         payload = response.json()
-        print(payload)
         self.assertEqual(len(payload['results']), 3)
 
 
@@ -37,3 +36,7 @@ class StationTestCase(FunctionalTestCase, TestCase):
         }
         response = self.api_post(client, reverse_api('stations:station-list'), data)
         self.assertEqual(response.status_code, 201)
+
+        # name is required unique, doing it again should fail. 
+        response = self.api_post(client, reverse_api('stations:station-list'), data)
+        self.assertEqual(response.status_code, 400)
