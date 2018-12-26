@@ -8,11 +8,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+These pieces of software are required to run the project in development:
+* VirtualBox
+* Android Studio
 
 ### Installing
 
@@ -20,8 +18,11 @@ A step by step series of examples that tell you how to get a development env run
 
 Add forwarding from android emulator to vagrant box.
 
-```
+** 1. Add Android emualtor ports to forward to the guest box **
+
 in `~/.ssh/config` add the following
+
+```
 Host 127.0.0.1
     RemoteForward 5037 127.0.0.1:5037
 ```
@@ -30,6 +31,15 @@ Or optionally, you can just always enter the vagrant machine by using
 ```
 vagrant ssh -- -R 5037:localhost:5037
 ```
+
+** 2. Build the machine **
+`cd` into the project and enter:
+
+```
+vagrant up 
+```
+
+This will begin the initial build of the project. This may take 10-25 minutes depending on your latency, box ram, etc. 
 
 
 We're working to make the install process a little less gnarly.
@@ -60,9 +70,10 @@ Standard API versioning is in place. We'll be on 1.0 for a while.
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Rob Wise** - *Developer*
+* **Kayla Bott** - *Product Manager*
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+And check out the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
