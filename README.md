@@ -1,6 +1,6 @@
-# Project Title
+# birdr
 
-One Paragraph of project description goes here
+Birdr is an app designed to help biologists monitor and mantain banding station data. 
 
 ## Getting Started
 
@@ -18,57 +18,45 @@ Give examples
 
 A step by step series of examples that tell you how to get a development env running
 
-Say what the step will be
+Add forwarding from android emulator to vagrant box.
 
 ```
-Give the example
+in `~/.ssh/config` add the following
+Host 127.0.0.1
+    RemoteForward 5037 127.0.0.1:5037
 ```
 
-And repeat
-
+Or optionally, you can just always enter the vagrant machine by using
 ```
-until finished
+vagrant ssh -- -R 5037:localhost:5037
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+
+We're working to make the install process a little less gnarly.
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+Functional tests can be ran by using:
 
 ```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
+manage.py test --patterfn="f*.py"
 ```
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Skip this for now.
 
 ## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Django 2.0](https://www.djangoproject.com/) - Backend Framework
+* [Nativescript Vue](https://nativescript-vue.org/) - Frontend utilities.
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+If for some reason you want to contribute, just message me via the power of the internet.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+Standard API versioning is in place. We'll be on 1.0 for a while. 
 
 ## Authors
 
@@ -82,7 +70,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-
+* Inspired by birdrs
