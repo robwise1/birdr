@@ -31,19 +31,8 @@ python3 -m pip install -r /vagrant/build/requirements.txt
 # install curl
 apt-get install -y curl
 
-# # install cloud sdk
-# export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
-# echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-# curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-# apt-get update
-# apt-get install -y google-cloud-sdk google-cloud-sdk-app-engine-python google-cloud-sdk-datastore-emulator
 
-# install cloud sql proxy
 cd /home/vagrant
-# wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
-# chmod +x cloud_sql_proxy
-# mkdir /cloudsql
-# chmod 777 /cloudsql
 
 # install and configure supervisor
 apt-get install -y supervisor
@@ -75,3 +64,50 @@ sudo -u postgres psql -c "CREATE ROLE birdy SUPERUSER INHERIT CREATEDB LOGIN PAS
 # run migrations
 cd /vagrant/project/core/
 python3 manage.py migrate
+
+
+# install android sdk 
+sudo apt-get install unzip
+mkdir /home/vagrant/android-sdk/
+cd /home/vagrant/android-sdk/
+sudo wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+unzip sdk-tools-linux-4333796.zip 
+sudo rm sdk-tools-linux-4333796.zip
+
+
+# Install oracle crap - fixup repositories: this fails, but still works 
+sudo apt-get install software-properties-common -y
+yes | sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update 
+# auto add license acceptence 
+echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
+yes | sudo apt-get install oracle-java8-installer --allow-unauthenticated
+
+
+
+# set paths 
+export ANDROID_HOME=/home/vagrant/android-sdk/
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export JAVA_HOME=$(update-alternatives --query javac | sed -n -e 's/Best: *\(.*\)\/bin\/javac/\1/p')
+
+
+
+# sometimes space gets borked, clean up tmp/ 
+
+# fetch android images
+yes | sdkmanager "system-images;android-28;google_apis;x86"
+sdkmanager "tools" "emulator" "platform-tools" "platforms;android-28" "build-tools;28.0.3" "extras;android;m2repository" "extras;google;m2repository"
+
+
+# grab nvm to install node  & npm
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+source ~/.bashrc
+nvm install node
+
+yes | npm install nativescript -g --unsafe-perm
+
+# install nsv
+npm install -g @vue/cli @vue/cli-init

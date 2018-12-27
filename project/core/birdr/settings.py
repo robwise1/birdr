@@ -60,12 +60,14 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'birdr.urls'
 
 
+TEMPLATE_DIRS  = [
+    '/vagrant/project/templates',
+]
 
-TEMPLATE_PATH = '/vagrant/project/templates'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_PATH],
+        'DIRS': TEMPLATE_DIRS,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
